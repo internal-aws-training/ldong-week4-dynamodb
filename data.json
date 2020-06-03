@@ -1,0 +1,41 @@
+{
+  "ProjectName": {
+    "S": "Demo123"
+  },
+  "ProjectType": {
+    "S": "Test123"
+  },
+  "MemberName": {
+    "S": "Jack123"
+  },
+  "StartDate": {
+    "S": "2020-05-29T13:42:34Z"
+  },
+  "Binary": {
+    "B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+  },
+  "IsOK": {
+    "BOOL": true
+  },
+  "BFlags": {
+    "BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]
+  },
+  "List": {
+    "L": [{ "S": "Cookies" }, { "S": "Coffee" }, { "N": "3.14159" }]
+  },
+  "Map": {
+    "M": { "Name": { "S": "Joe" }, "Age": { "N": "35" } }
+  },
+  "Num": {
+    "N": "123.45"
+  },
+  "Nums": {
+    "NS": ["42.2", "-19", "7.5", "3.14"]
+  },
+  "Null": {
+    "NULL": true
+  },
+  "Strings": {
+    "SS": ["Giraffe", "Hippo", "Zebra"]
+  }
+}
