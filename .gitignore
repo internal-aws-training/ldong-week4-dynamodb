@@ -6,8 +6,10 @@
 *.sln.docstates
 
 # VS Code 
-
 .vs/
+
+# File Systerm
+.DS_Store
 
 # Build results
 [Dd]ebug/
