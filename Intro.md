@@ -15,3 +15,27 @@ List tabels
 ```bash
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
+
+## Run Sample Api
+
+```bash
+dotnet run src/DynamoDbLocalSample
+```
+
+Routes:
+
+| name        | Method | Url                            |
+| ----------- | ------ | ------------------------------ |
+| init        | GET    | localhost:5000/api/sample/init |
+| get item    | GET    | localhost:5000/api/sample/5    |
+| put item    | POST   | localhost:5000/api/sample/     |
+| delete item | DELETE | locahost:5000/api/sample/5     |
+
+data structure:
+
+```json
+{
+  "Id" : 1,
+  "Title": "Some Text"
+}
+```

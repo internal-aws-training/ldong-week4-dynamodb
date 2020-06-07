@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace DynamoDbLocalSample.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public partial class SampleController : ControllerBase
     {
         private const string TableName = "Project_ldong_SampleData";
@@ -22,7 +22,7 @@ namespace DynamoDbLocalSample.Controllers
             _logger = logger;
         }
 
-        // GET /sample/init
+        // GET api/sample/init
         [HttpGet]
         [Route("init")]
         public async Task Initialise()
@@ -72,5 +72,56 @@ namespace DynamoDbLocalSample.Controllers
             }
         }
 
+        // GET api/sample/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<string>> Get(int id)
+        {
+            var request = new GetItemRequest
+            {
+                TableName = TableName,
+                Key = new Dictionary<string, AttributeValue> { { "Id", new AttributeValue { N = id.ToString() } } }
+            };
+
+            var response = await _amazonDynamoDb.GetItemAsync(request);
+
+            if (!response.IsItemSet)
+            {
+                return NotFound();
+            }
+
+            return response.Item["Title"].S;
+        }
+
+        // POST api/sample/
+        [HttpPost]
+        public async Task Post([FromBody] PostInput input)
+        {
+            var request = new PutItemRequest
+            {
+                TableName = TableName,
+                Item = new Dictionary<string, AttributeValue>
+                {
+                    { "Id", new AttributeValue { N = input.Id.ToString() }},
+                    { "Title", new AttributeValue { S = input.Title }}
+                }
+            };
+
+            await _amazonDynamoDb.PutItemAsync(request);
+        }
+
+        // DELETE api/sample/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var request = new DeleteItemRequest
+            {
+                TableName = TableName,
+                Key = new Dictionary<string, AttributeValue> { { "Id", new AttributeValue { N = id.ToString() } } }
+            };
+
+            var response = await _amazonDynamoDb.DeleteItemAsync(request);
+
+            return StatusCode((int)response.HttpStatusCode);
+        }
     }
 }
